@@ -30,11 +30,20 @@ namespace Vectors3DTests
     [TestClass]
     public class VectorClassTests
     {
-        [DataRow()]
+        [DataRow(1, 2, 3, 1, 2, 3, 0, 0, 0)]
+        [DataRow(3, 4, 5, 1, 2, 3, 2, 2, 2)]
+        [DataRow(5, 5, 5, 3, 4, 1, 2, 1, 4)]
         [DataTestMethod]
-        public void MinusOperatorTest()
+        public void MinusOperatorTest(double x1, double y1, double z1, double x2, double y2, double z2, double x, double y, double z)
         {
-
+            double[] firstArray = { x1, y1, z1 };
+            double[] secondArray = { x2, y2, z2 };
+            double[] expectedArray = { x, y, z };
+            Vectors.Vector first = new(firstArray);
+            Vectors.Vector second = new(secondArray);
+            Vectors.Vector expected = new(expectedArray);
+            Vectors.Vector actual = first - second;
+            Assert.IsTrue(expected == actual);
         }
     }
 }
