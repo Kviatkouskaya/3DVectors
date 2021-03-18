@@ -4,9 +4,9 @@ namespace Vectors
 {
     public class Vector
     {
-        private readonly double x;
-        private readonly double y;
-        private readonly double z;
+        public readonly double x;
+        public readonly double y;
+        public readonly double z;
         public Vector(double[] vectors)
         {
             x = vectors[0];
