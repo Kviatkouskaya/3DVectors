@@ -165,9 +165,9 @@ namespace Vectors3DTests
             Assert.IsTrue(first.Equals(second));
         }
 
-        [DataRow(1, 2, 3)]
-        [DataRow(5, 5, 5)]
-        [DataRow(1, 1, 1)]
+        [DataRow(1, 2, 3, 2, 3, 5)]
+        [DataRow(5, 5, 5, 5, 5, 5)]
+        [DataRow(1, 1, 1, 1, 1, 1)]
         [DataTestMethod]
         public void VectorEquals2(double x1, double y1, double z1, double x2, double y2, double z2)
         {
