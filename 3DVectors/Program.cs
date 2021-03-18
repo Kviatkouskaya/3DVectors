@@ -46,7 +46,12 @@ namespace Vectors
                               first.z * number };
             return new Vector(vector);
         }
-
+        public static double operator*(Vector first, Vector second)
+        {
+            return first.x * second.x +
+                   first.y * second.y +
+                   first.z * second.z;
+        }
         public override bool Equals(object obj)
         {
             return ReferenceEquals(this, obj) && obj != null;
@@ -93,9 +98,14 @@ namespace Vectors
         {
             Vector first = new(ParseLine(InputVector()));
             Vector second = new (ParseLine(InputVector()));
-            Console.WriteLine($"\nMinus operation result is: {Vector.ToString(first - second)}");
+            Console.WriteLine("Enter number: ");
+            double number = double.Parse(Console.ReadLine());
+            Console.WriteLine($"\nComparison result is: {first == second}");
+            Console.WriteLine($"Not compare operation is: {first!=second}");
             Console.WriteLine($"Plus operation result is: {Vector.ToString(first + second)}");
-            Console.WriteLine($"Comparison result is: {first == second}");
+            Console.WriteLine($"Minus operation result is: {Vector.ToString(first - second)}");
+            Console.WriteLine($"Vectors and number multiplication is: {first*number}");
+            Console.WriteLine($"Vectors multiplication is: {first*second}");
         }
     }
 }
