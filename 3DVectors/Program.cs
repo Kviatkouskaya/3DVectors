@@ -4,66 +4,60 @@ namespace Vectors
 {
     public class Vector
     {
-        public readonly double x;
-        public readonly double y;
-        public readonly double z;
-        public Vector(double[] vectors)
+        public readonly double[] vectorArray = new double[3];
+        public Vector(double a, double b, double c)
         {
-            x = vectors[0];
-            y = vectors[1];
-            z = vectors[2];
+            vectorArray[0] = a;
+            vectorArray[1] = b;
+            vectorArray[2] = c;
         }
         public static bool operator ==(Vector first, Vector second)
         {
-            return first.x == second.x &&
-                   first.y == second.y &&
-                   first.z == second.z;
+            return first.vectorArray[0] == second.vectorArray[0] &&
+                   first.vectorArray[1] == second.vectorArray[1] &&
+                   first.vectorArray[2] == second.vectorArray[2];
         }
         public static bool operator !=(Vector first, Vector second)
         {
-            return first.x != second.x ||
-                   first.y != second.y ||
-                   first.z != second.z;
+            return first.vectorArray[0] != second.vectorArray[0] ||
+                   first.vectorArray[1] != second.vectorArray[1] ||
+                   first.vectorArray[2] != second.vectorArray[2];
         }
         public static Vector operator +(Vector first, Vector second)
         {
-            double[] vector = {first.x + second.x,
-                              first.y + second.y,
-                              first.z + second.z };
-            return new Vector(vector);
+            return new Vector(first.vectorArray[0] + second.vectorArray[0],
+                              first.vectorArray[1] + second.vectorArray[1],
+                              first.vectorArray[2] + second.vectorArray[2]);
         }
         public static Vector operator -(Vector first, Vector second)
         {
-            double[] vector = {first.x - second.x,
-                              first.y - second.y,
-                              first.z - second.z };
-            return new Vector(vector);
+            return new Vector(first.vectorArray[0] - second.vectorArray[0],
+                              first.vectorArray[1] - second.vectorArray[1],
+                              first.vectorArray[2] - second.vectorArray[2]);
         }
         public static Vector operator *(Vector first, double number)
         {
-            double[] vector = {first.x * number,
-                              first.y * number,
-                              first.z * number };
-            return new Vector(vector);
+            return new Vector(first.vectorArray[0] * number,
+                              first.vectorArray[1] * number,
+                              first.vectorArray[2] * number);
         }
-        public static double operator*(Vector first, Vector second)
+        public static double operator *(Vector first, Vector second)
         {
-            return first.x * second.x +
-                   first.y * second.y +
-                   first.z * second.z;
+            return first.vectorArray[0] * second.vectorArray[0] +
+                   first.vectorArray[1] * second.vectorArray[1] +
+                   first.vectorArray[2] * second.vectorArray[2];
         }
         public override bool Equals(object obj)
         {
             return ReferenceEquals(this, obj) && obj != null;
         }
-
         public override int GetHashCode()
         {
-            return Convert.ToInt32(x * y * z);
+            return Convert.ToInt32(vectorArray[0] * vectorArray[1] * vectorArray[2]);
         }
         public static string ToString(Vector vector)
         {
-            return $" {vector.x}, {vector.y}, {vector.z}";
+            return $" {vector.vectorArray[0]}, {vector.vectorArray[1]}, {vector.vectorArray[2]}";
         }
     }
     public class Program
@@ -87,25 +81,25 @@ namespace Vectors
                 }
             }
         }
-        public static double[] ParseLine(string line)
+        public static Vector ParseLine(string line)
         {
             string[] stringVector = line.Split(',');
             CheckStringArray(stringVector);
             double[] result = Array.ConvertAll(stringVector, double.Parse);
-            return result;
+            return new Vector(result[0], result[1], result[2]);
         }
         static void Main()
         {
-            Vector first = new(ParseLine(InputVector()));
-            Vector second = new (ParseLine(InputVector()));
+            Vector first = ParseLine(InputVector());
+            Vector second = ParseLine(InputVector());
             Console.WriteLine("Enter number: ");
             double number = double.Parse(Console.ReadLine());
             Console.WriteLine($"\nComparison result is: {first == second}");
-            Console.WriteLine($"Not compare operation is: {first!=second}");
+            Console.WriteLine($"Not compare operation is: {first != second}");
             Console.WriteLine($"Plus operation result is: {Vector.ToString(first + second)}");
             Console.WriteLine($"Minus operation result is: {Vector.ToString(first - second)}");
-            Console.WriteLine($"Vectors and number multiplication is: {first*number}");
-            Console.WriteLine($"Vectors multiplication is: {first*second}");
+            Console.WriteLine($"Vectors and number multiplication is: {Vector.ToString(first * number)}");
+            Console.WriteLine($"Vectors multiplication is: {first * second}");
         }
     }
 }
