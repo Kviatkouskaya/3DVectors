@@ -35,27 +35,30 @@ namespace Vectors
         }
         public static Vector operator +(Vector first, Vector second)
         {
-            for (int i = 0; i < first.vectorArray.Length; i++)
+            Vector vector = Clone(first);
+            for (int i = 0; i < vector.vectorArray.Length; i++)
             {
-                first.vectorArray[i] += second.vectorArray[i];
+                vector.vectorArray[i] += second.vectorArray[i];
             }
-            return first;
+            return vector;
         }
         public static Vector operator -(Vector first, Vector second)
         {
-            for (int i = 0; i < first.vectorArray.Length; i++)
+            Vector vector = Clone(first);
+            for (int i = 0; i < vector.vectorArray.Length; i++)
             {
-                first.vectorArray[i] -= second.vectorArray[i];
+                vector.vectorArray[i] -= second.vectorArray[i];
             }
-            return first;
+            return vector;
         }
         public static Vector operator *(Vector first, double number)
         {
-            for (int i = 0; i < first.vectorArray.Length; i++)
+            Vector vector = Clone(first);
+            for (int i = 0; i < vector.vectorArray.Length; i++)
             {
-                first.vectorArray[i] = first.vectorArray[i] * number;
+                vector.vectorArray[i] *= number;
             }
-            return first;
+            return vector;
         }
         public static double operator *(Vector first, Vector second)
         {
@@ -77,6 +80,10 @@ namespace Vectors
         public static string ToString(Vector vector)
         {
             return $" {vector.vectorArray[0]}, {vector.vectorArray[1]}, {vector.vectorArray[2]}";
+        }
+        public static Vector Clone(Vector value)
+        {
+            return new Vector(value.vectorArray[0], value.vectorArray[1], value.vectorArray[2]);
         }
     }
     public class Program
