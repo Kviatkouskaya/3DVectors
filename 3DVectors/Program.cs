@@ -13,39 +13,58 @@ namespace Vectors
         }
         public static bool operator ==(Vector first, Vector second)
         {
-            return first.vectorArray[0] == second.vectorArray[0] &&
-                   first.vectorArray[1] == second.vectorArray[1] &&
-                   first.vectorArray[2] == second.vectorArray[2];
+            for (int i = 0; i < first.vectorArray.Length; i++)
+            {
+                if (first.vectorArray[i] != second.vectorArray[i])
+                {
+                    return false;
+                }
+            }
+            return true;
         }
         public static bool operator !=(Vector first, Vector second)
         {
-            return first.vectorArray[0] != second.vectorArray[0] ||
-                   first.vectorArray[1] != second.vectorArray[1] ||
-                   first.vectorArray[2] != second.vectorArray[2];
+            for (int i = 0; i < first.vectorArray.Length; i++)
+            {
+                if (first.vectorArray[i] != second.vectorArray[i])
+                {
+                    return true;
+                }
+            }
+            return false;
         }
         public static Vector operator +(Vector first, Vector second)
         {
-            return new Vector(first.vectorArray[0] + second.vectorArray[0],
-                              first.vectorArray[1] + second.vectorArray[1],
-                              first.vectorArray[2] + second.vectorArray[2]);
+            for (int i = 0; i < first.vectorArray.Length; i++)
+            {
+                first.vectorArray[i] += second.vectorArray[i];
+            }
+            return first;
         }
         public static Vector operator -(Vector first, Vector second)
         {
-            return new Vector(first.vectorArray[0] - second.vectorArray[0],
-                              first.vectorArray[1] - second.vectorArray[1],
-                              first.vectorArray[2] - second.vectorArray[2]);
+            for (int i = 0; i < first.vectorArray.Length; i++)
+            {
+                first.vectorArray[i] -= second.vectorArray[i];
+            }
+            return first;
         }
         public static Vector operator *(Vector first, double number)
         {
-            return new Vector(first.vectorArray[0] * number,
-                              first.vectorArray[1] * number,
-                              first.vectorArray[2] * number);
+            for (int i = 0; i < first.vectorArray.Length; i++)
+            {
+                first.vectorArray[i] = first.vectorArray[i] * number;
+            }
+            return first;
         }
         public static double operator *(Vector first, Vector second)
         {
-            return first.vectorArray[0] * second.vectorArray[0] +
-                   first.vectorArray[1] * second.vectorArray[1] +
-                   first.vectorArray[2] * second.vectorArray[2];
+            double multiplication = 0;
+            for (int i = 0; i < first.vectorArray.Length; i++)
+            {
+                multiplication += first.vectorArray[i] * second.vectorArray[i];
+            }
+            return multiplication;
         }
         public override bool Equals(object obj)
         {
